@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=Asia/Seoul
+    username: root
+    password: 1q2w3e4r!!
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+server:
+  port: 8001
+
+jwt:
+  secret: sdfjdsfksdfjksdjfksadfkldjl
+
+
