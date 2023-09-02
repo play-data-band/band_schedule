@@ -5,11 +5,8 @@ spring:
     password: 1q2w3e4r!!
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
-
-server:
-  port: 8001
 
 jwt:
   secret: sdfjdsfksdfjksdjfksadfkldjl

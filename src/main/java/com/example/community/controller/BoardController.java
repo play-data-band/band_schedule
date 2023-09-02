@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController{
     private final BoardService boardService;
 
-    @GetMapping("/{boardId}")
+    @GetMapping("/{communityId}")
     public Page<BoardResponse> findByCommunityId(
-            @PathVariable("boardId")Long boardId,
+            @PathVariable("communityId")Long communityId,
             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "size", required = false, defaultValue = "10") Integer size
                                                  ){
-        return boardService.findByCommunityId(boardId,PageRequest.of(page,size));
+        return boardService.findByCommunityId(communityId,PageRequest.of(page,size));
     }
 
     @PutMapping("/{boardId}")
@@ -42,6 +42,7 @@ public class BoardController{
         boardService.save(boardRequest,communityId);
     }
 
+    //프론트단에서 memberId로 삭제 권한 부여됨
     @DeleteMapping("/{boardId}")
     public void deleteBoard(@PathVariable("boardId")Long boardId){
         boardService.deleteByBoardId(boardId);

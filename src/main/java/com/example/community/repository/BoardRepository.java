@@ -13,7 +13,6 @@ import org.springframework.data.repository.query.Param;
 public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("select new com.example.community.domain.response.BoardResponse(b.id,b.title,b.content,b.memberId,b.memberImage,b.memberName) " +
             "from Board b " +
-            "inner join b.communityId " +
             "where b.communityId = :communityId ")
     Page<BoardResponse> findByCommunity(@Param("communityId")Long communityId, PageRequest pageRequest);
 

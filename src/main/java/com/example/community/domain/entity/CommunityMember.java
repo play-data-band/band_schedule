@@ -4,7 +4,9 @@ package com.example.community.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "CommunityMembers")
+@Table(name = "CommunityMembers",indexes = {
+        @Index(name = "communityIdIndenx",columnList = "communityId"),
+        @Index(name = "memberIdIndenx",columnList = "memberId")})
 @Entity
 @Builder
 @Getter

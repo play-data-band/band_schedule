@@ -6,6 +6,7 @@ import com.example.community.domain.request.CommunityReqeust;
 import com.example.community.repository.CommunityMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CommunityMemberService {
 
 
     //커뮤니티 구성원은 인원수가 많을 것 같지 않아서 페이지 대신 리스트로 뽑음
-    public List<CommunityMember> findByCommunityId(Long communityId){
+    public List<CommunityMember> findAllByCommunityId(Long communityId){
         return communityMemberRepository.findAllByCommunityId(communityId);
     }
 
@@ -31,13 +32,18 @@ public class CommunityMemberService {
         return communityMemberRepository.findAllByMemberId(memberId);
     }
 
-    public void updateCommunityInCommunityMember(CommunityMemberReqeust communityMemberReqeust){
-        communityMemberRepository.updateCommunityInCommunityMember(communityMemberReqeust);
+    @Transactional
+    //커뮤니티가 업데이트 돼면 중계테이블도 업데이트 되어야함
+    public void updateCommunityInCommunityMember(CommunityMemberReqeust communityMemberReqeust, Long communityId){
+        communityMemberRepository.updateCommunityInCommunityMember(communityMemberReqeust,communityId);
     };
 
-    public void updateMemberInCommunityMember(CommunityMemberReqeust communityMemberReqeust){
-        communityMemberRepository.updateMemberInCommunityMember(communityMemberReqeust);
+    @Transactional
+    //멤버가 업데이트 되면 중계테이블도 업데이트 되어야함
+    public void updateMemberInCommunityMember(CommunityMemberReqeust communityMemberReqeust,Long memberId){
+        communityMemberRepository.updateMemberInCommunityMember(communityMemberReqeust, memberId);
     };
+
 
     public void deleteCommunityMember(Long memberId, Long communityId){
         communityMemberRepository.deleteByMemberIdAndCommunityId(memberId, communityId);

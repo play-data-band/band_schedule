@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommunityResponse {
     private Long id;
+    private Long ownerId;
     private String name;
     private String category;
     private String interest;

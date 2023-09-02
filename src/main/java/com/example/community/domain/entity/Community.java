@@ -13,6 +13,7 @@ public class Community {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long ownerId;
     private String name;
     private String location;
     private String category;

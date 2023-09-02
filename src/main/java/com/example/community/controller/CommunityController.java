@@ -32,10 +32,10 @@ public class CommunityController {
         return communityService.findAllByInterest(interest, PageRequest.of(page,size));
     }
 
-    //id memberId로?
-    @DeleteMapping("/{deleteById}")
-    public void deleteById(@PathVariable("deleteById") Long deleteById){
-        communityService.findById(deleteById);
+    //ownerId
+    @DeleteMapping("/{communityId}")
+    public void deleteById(@PathVariable("communityId") Long communityId){
+        communityService.deleteById(communityId);
     }
 
     @PutMapping("/{updateById}")

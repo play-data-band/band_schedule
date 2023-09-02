@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CustomCommunityMemberRepositoryImpl implements CustomCommunityMemberRepository{
     private final JPAQueryFactory queryFactory;
-    private QCommunityMember qCommunityMember;
+    private QCommunityMember qCommunityMember = QCommunityMember.communityMember;
 
     @Override
-    public void updateCommunityInCommunityMember(CommunityMemberReqeust communityMemberReqeust) {
+    public void updateCommunityInCommunityMember(CommunityMemberReqeust communityMemberReqeust,Long communityId) {
         JPAUpdateClause updateClause = queryFactory.update(qCommunityMember);
         if(communityMemberReqeust.getCommunityImage() != null){
             updateClause.set(qCommunityMember.communityImage,communityMemberReqeust.getCommunityImage());
@@ -22,13 +22,13 @@ public class CustomCommunityMemberRepositoryImpl implements CustomCommunityMembe
         if(communityMemberReqeust.getCommunityName() != null){
             updateClause.set(qCommunityMember.communityName, communityMemberReqeust.getCommunityName());
         }
-        BooleanExpression whereCondition = qCommunityMember.communityId.eq(communityMemberReqeust.getCommunityId());
+        BooleanExpression whereCondition = qCommunityMember.communityId.eq(communityId);
         updateClause.where(whereCondition);
         updateClause.execute();
     }
 
     @Override
-    public void updateMemberInCommunityMember(CommunityMemberReqeust communityMemberReqeust) {
+    public void updateMemberInCommunityMember(CommunityMemberReqeust communityMemberReqeust, Long memberID) {
         JPAUpdateClause updateClause = queryFactory.update(qCommunityMember);
         if(communityMemberReqeust.getMemberImage() != null){
             updateClause.set(qCommunityMember.memberImage,communityMemberReqeust.getMemberImage());
@@ -42,7 +42,7 @@ public class CustomCommunityMemberRepositoryImpl implements CustomCommunityMembe
             updateClause.set(qCommunityMember.memberRole, communityMemberReqeust.getMemberRole());
         }
 
-        BooleanExpression whereCondition = qCommunityMember.memberId.eq(communityMemberReqeust.getMemberId());
+        BooleanExpression whereCondition = qCommunityMember.memberId.eq(memberID);
         updateClause.where(whereCondition);
         updateClause.execute();
     }

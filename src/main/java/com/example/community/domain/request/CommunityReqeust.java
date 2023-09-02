@@ -11,6 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class    CommunityReqeust {
+    private Long ownerId;
     private String name;
     private String location;
     private String category;
@@ -22,6 +23,7 @@ public class    CommunityReqeust {
     public Community toEntity(){
         return Community.builder()
                 .name(name)
+                .ownerId(ownerId)
                 .location(location)
                 .category(category)
                 .interest(interest)
