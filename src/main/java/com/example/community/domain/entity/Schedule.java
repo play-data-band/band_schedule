@@ -18,9 +18,13 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String content;
+    private String scheduleName;
     private LocalDateTime scheduleTime;
+    private String meetingPlace;
+    private String price;
+    private int maxParticipation;
+    private int Participant;
+
     @ManyToOne
     private Community community;
 
